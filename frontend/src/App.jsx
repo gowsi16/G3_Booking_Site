@@ -1,5 +1,7 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Link, useLocation, useNavigate } from 'react-router-dom';
+import { AuthProvider, useAuth } from './context/AuthContext';
+import { User, LogOut } from 'lucide-react';
 
 import Home from './pages/Home';
 import Booking from './pages/Booking';
@@ -14,12 +16,14 @@ const fontBody = { fontFamily: "'IBM Plex Sans', sans-serif" };
 
 function Navbar() {
   const location = useLocation();
+  const navigate = useNavigate();
+  const { user, isLoggedIn, logout } = useAuth();
+
   const links = [
     { name: 'Home', path: '/' },
     { name: 'Book', path: '/book' },
     { name: 'Track', path: '/track' },
     { name: 'About', path: '/about' },
-    { name: 'Login', path: '/login' },
   ];
 
   return (
@@ -31,7 +35,7 @@ function Navbar() {
             <h1 style={fontDisplay} className="text-xl font-bold leading-tight text-slate-800 tracking-tight">G3 Transport</h1>
           </div>
         </Link>
-        <div className="flex items-center gap-6 text-sm font-medium" style={fontBody}>
+        <div className="flex items-center gap-5 text-sm font-medium" style={fontBody}>
           {links.map(l => (
             <Link 
               key={l.path} 
@@ -41,6 +45,34 @@ function Navbar() {
               {l.name}
             </Link>
           ))}
+
+          {/* User state in navbar */}
+          {isLoggedIn ? (
+            <div className="flex items-center gap-3 pl-2 border-l border-slate-200">
+              <div className="flex items-center gap-1.5 bg-amber-50 text-amber-900 border border-amber-200/80 px-3 py-1.5 rounded-full text-xs font-semibold">
+                <User size={13} className="text-amber-600" />
+                <span className="max-w-[120px] truncate">{user.name.split(' ')[0]}</span>
+              </div>
+              <button
+                onClick={() => {
+                  logout();
+                  navigate('/');
+                }}
+                title="Logout"
+                className="text-slate-400 hover:text-red-600 transition-colors p-1"
+              >
+                <LogOut size={16} />
+              </button>
+            </div>
+          ) : (
+            <Link 
+              to="/login" 
+              className={`transition-colors hover:text-amber-500 font-semibold ${location.pathname === '/login' ? 'text-blue-600' : 'text-slate-700'}`}
+            >
+              Login
+            </Link>
+          )}
+
           <Link to="/admin" className="text-xs px-3 py-1.5 border border-slate-300 rounded-full text-slate-500 hover:bg-slate-100 transition-colors">
             Admin
           </Link>
@@ -73,22 +105,24 @@ function Footer() {
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <div className="w-full flex flex-col min-h-screen font-sans bg-slate-50">
-        <Navbar />
-        <main className="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 relative">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/book" element={<Booking />} />
-            <Route path="/track" element={<Tracking />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/admin" element={<AdminLogin />} />
-            <Route path="/admin/dashboard" element={<AdminDashboard />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
-    </BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
+        <div className="w-full flex flex-col min-h-screen font-sans bg-slate-50">
+          <Navbar />
+          <main className="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 relative">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/book" element={<Booking />} />
+              <Route path="/track" element={<Tracking />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/admin" element={<AdminLogin />} />
+              <Route path="/admin/dashboard" element={<AdminDashboard />} />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }

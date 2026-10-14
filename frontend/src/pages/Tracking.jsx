@@ -114,6 +114,13 @@ export default function Tracking() {
               <div className="flex items-start gap-4 p-5 rounded-xl bg-slate-50">
                 <div className="p-3 bg-white rounded-lg shadow-sm text-slate-600"><Truck size={24} /></div>
                 <div>
+                  <p className="text-xs uppercase font-bold text-slate-400 tracking-wider mb-1">Lorry Booked</p>
+                  <p style={fontBody} className="text-lg font-bold text-slate-800">{result.vehicle_type || 'Standard Lorry'}</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4 p-5 rounded-xl bg-slate-50">
+                <div className="p-3 bg-white rounded-lg shadow-sm text-slate-600"><Truck size={24} /></div>
+                <div>
                   <p className="text-xs uppercase font-bold text-slate-400 tracking-wider mb-1">Driver Assigned</p>
                   <p style={fontBody} className="text-lg font-bold text-slate-800">{result.assigned_driver || 'Pending Assignment'}</p>
                 </div>
@@ -123,6 +130,13 @@ export default function Tracking() {
                 <div>
                   <p className="text-xs uppercase font-bold text-slate-400 tracking-wider mb-1">Expected Date</p>
                   <p style={fontBody} className="text-lg font-bold text-slate-800">{result.expected_date || 'N/A'}</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4 p-5 rounded-xl bg-slate-50">
+                <div className="p-3 bg-white rounded-lg shadow-sm text-amber-500 font-mono font-bold text-xl">₹</div>
+                <div>
+                  <p className="text-xs uppercase font-bold text-slate-400 tracking-wider mb-1">Total Transport Price</p>
+                  <p style={fontBody} className="text-lg font-bold text-amber-600">₹{(result.estimated_price || 0).toLocaleString('en-IN')}</p>
                 </div>
               </div>
             </div>
