@@ -33,7 +33,6 @@ export default function AdminLogin() {
   // Session & Metadata from Step 1
   const [sessionToken, setSessionToken] = useState('');
   const [maskedEmail, setMaskedEmail] = useState('');
-  const [devOtpHint, setDevOtpHint] = useState('');
 
   // Timers
   const [expirySeconds, setExpirySeconds] = useState(300); // 5 minutes
@@ -108,10 +107,7 @@ export default function AdminLogin() {
       setCooldownSeconds(data.resendCooldownSeconds || 60);
       setRemainingAttempts(5);
       setOtp(['', '', '', '', '', '']);
-      if (data.devOtp) {
-        setDevOtpHint(data.devOtp);
-      }
-      setSuccess(`Verification code sent to ${data.maskedEmail || 'your email'}.`);
+      setSuccess(data.message || `Verification code sent to ${data.maskedEmail || 'your email'}.`);
       setStep('OTP');
       
       // Auto-focus first OTP input after small delay
@@ -244,10 +240,7 @@ export default function AdminLogin() {
       setCooldownSeconds(data.resendCooldownSeconds || 60);
       setRemainingAttempts(5);
       setOtp(['', '', '', '', '', '']);
-      if (data.devOtp) {
-        setDevOtpHint(data.devOtp);
-      }
-      setSuccess('A fresh 6-digit OTP code has been sent to your email.');
+      setSuccess(data.message || 'A fresh 6-digit OTP code has been sent to your email.');
       otpInputsRef.current[0]?.focus();
     } catch (err) {
       setError(err.message);
@@ -404,17 +397,6 @@ export default function AdminLogin() {
               )}
             </div>
 
-            {/* Development Mode OTP helper banner (if Google App Password is not yet set locally) */}
-            {devOtpHint && (
-              <div className="p-3 bg-amber-50/80 border border-amber-200 rounded-xl text-left">
-                <div className="text-[11px] font-bold text-amber-900 uppercase tracking-wider mb-0.5">
-                  Local Dev Assistant (Gmail SMTP App Password Fallback)
-                </div>
-                <div className="text-xs text-amber-800 font-mono">
-                  Current OTP: <span className="font-extrabold text-slate-900 bg-white px-2 py-0.5 rounded border border-amber-300">{devOtpHint}</span>
-                </div>
-              </div>
-            )}
 
             {/* Action Buttons */}
             <div className="space-y-3 pt-1">

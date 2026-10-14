@@ -6,7 +6,7 @@ import { useAuth } from '../context/AuthContext';
 const fontDisplay = { fontFamily: "'Space Grotesk', sans-serif" };
 const fontBody = { fontFamily: "'IBM Plex Sans', sans-serif" };
 
-const inputCls = "w-full text-sm px-4 py-3 rounded-lg border outline-none bg-slate-50 transition-all focus:bg-white focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 border-slate-200 text-slate-800 font-medium";
+const inputCls = "w-full text-sm px-4 py-3 rounded-lg border outline-none bg-slate-50 transition-all focus:bg-white focus:ring-2 focus:ring-green-500/20 focus:border-green-600 border-slate-200 text-slate-800 font-medium";
 
 export default function Login() {
   const [searchParams] = useSearchParams();
@@ -110,23 +110,23 @@ export default function Login() {
     <div className="w-full max-w-lg mx-auto pt-6 pb-12 animate-slide-up">
       {/* Alert if redirected from booking form */}
       {isBookingRedirect && (
-        <div className="mb-6 p-4 rounded-xl bg-amber-50 border border-amber-200 flex items-start gap-3 shadow-sm animate-bounce-short">
-          <ShieldCheck className="text-amber-600 mt-0.5 shrink-0" size={20} />
+        <div className="mb-6 p-4 rounded-xl bg-green-50 border border-green-200 flex items-start gap-3 shadow-sm animate-bounce-short">
+          <ShieldCheck className="text-green-700 mt-0.5 shrink-0" size={20} />
           <div>
-            <h4 style={fontDisplay} className="text-sm font-bold text-amber-900">
+            <h4 style={fontDisplay} className="text-sm font-bold text-green-900">
               Customer Login Required Before Booking
             </h4>
-            <p style={fontBody} className="text-xs text-amber-700 mt-0.5 leading-relaxed">
+            <p style={fontBody} className="text-xs text-green-800 mt-0.5 leading-relaxed">
               For security and freight tracking, you must log in to your account before accessing the lorry booking form.
             </p>
           </div>
         </div>
       )}
 
-      <div className="premium-card p-6 sm:p-10 shadow-xl border border-slate-200/80">
+      <div className="premium-card p-6 sm:p-10 shadow-xl border border-green-100">
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="w-16 h-16 rounded-2xl bg-amber-500/10 text-amber-600 flex items-center justify-center mb-4 mx-auto shadow-inner">
+          <div className="w-16 h-16 rounded-2xl bg-green-50 text-green-700 flex items-center justify-center mb-4 mx-auto shadow-inner border border-green-200">
             <User size={30} />
           </div>
           <h1 style={fontDisplay} className="text-3xl font-bold text-slate-800 tracking-tight">
@@ -146,7 +146,7 @@ export default function Login() {
             onClick={() => { setMode('login'); setError(''); setSuccessMsg(''); }}
             className={`flex-1 py-2.5 text-xs font-bold rounded-lg transition-all ${
               mode === 'login' 
-                ? 'bg-white text-slate-800 shadow-sm' 
+                ? 'bg-white text-green-800 shadow-sm font-extrabold' 
                 : 'text-slate-500 hover:text-slate-800'
             }`}
             style={fontDisplay}
@@ -158,7 +158,7 @@ export default function Login() {
             onClick={() => { setMode('register'); setError(''); setSuccessMsg(''); }}
             className={`flex-1 py-2.5 text-xs font-bold rounded-lg transition-all ${
               mode === 'register' 
-                ? 'bg-white text-slate-800 shadow-sm' 
+                ? 'bg-white text-green-800 shadow-sm font-extrabold' 
                 : 'text-slate-500 hover:text-slate-800'
             }`}
             style={fontDisplay}
@@ -206,7 +206,7 @@ export default function Login() {
                 <button
                   type="button"
                   onClick={() => alert("Please contact G3 Transport support at 9488289991 or gthreetransport@gmail.com to reset your password.")}
-                  className="text-xs font-semibold text-amber-600 hover:text-amber-700"
+                  className="text-xs font-semibold text-green-700 hover:text-green-800"
                 >
                   Forgot Password?
                 </button>
@@ -225,7 +225,7 @@ export default function Login() {
               type="submit"
               disabled={loading}
               style={fontDisplay}
-              className="w-full btn-primary px-6 py-4 rounded-xl text-base font-bold flex items-center justify-center gap-2 mt-2 shadow-lg shadow-amber-500/20 disabled:opacity-50"
+              className="w-full btn-primary px-6 py-4 rounded-xl text-base font-bold flex items-center justify-center gap-2 mt-2 shadow-lg shadow-green-900/20 disabled:opacity-50"
             >
               {loading ? "Signing in..." : "Login to Continue"} <ChevronRight size={18} />
             </button>
@@ -309,14 +309,14 @@ export default function Login() {
               <button
                 type="button"
                 onClick={() => setShowBusinessFields(!showBusinessFields)}
-                className="text-xs font-semibold text-blue-600 hover:text-blue-700 flex items-center gap-1"
+                className="text-xs font-semibold text-green-700 hover:text-green-800 flex items-center gap-1"
               >
                 {showBusinessFields ? "- Hide Company & GST details" : "+ Are you registering for a Company / Business? (Optional)"}
               </button>
             </div>
 
             {showBusinessFields && (
-              <div className="grid sm:grid-cols-2 gap-4 p-4 bg-slate-50 rounded-xl border border-slate-200 animate-slide-up">
+              <div className="grid sm:grid-cols-2 gap-4 p-4 bg-green-50/50 rounded-xl border border-green-200 animate-slide-up">
                 <div>
                   <label style={fontBody} className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
                     Company Name
@@ -348,7 +348,7 @@ export default function Login() {
               type="submit"
               disabled={loading}
               style={fontDisplay}
-              className="w-full btn-primary px-6 py-4 rounded-xl text-base font-bold flex items-center justify-center gap-2 mt-4 shadow-lg shadow-amber-500/20 disabled:opacity-50"
+              className="w-full btn-primary px-6 py-4 rounded-xl text-base font-bold flex items-center justify-center gap-2 mt-4 shadow-lg shadow-green-900/20 disabled:opacity-50"
             >
               {loading ? "Creating Account..." : "Register & Continue Booking"} <ChevronRight size={18} />
             </button>

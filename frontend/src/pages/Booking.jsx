@@ -10,7 +10,7 @@ import { useAuth } from "../context/AuthContext";
 const fontDisplay = { fontFamily: "'Space Grotesk', sans-serif" };
 const fontBody = { fontFamily: "'IBM Plex Sans', sans-serif" };
 
-const inputCls = "w-full text-sm px-4 py-3 rounded-xl border outline-none bg-white transition-all focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 border-slate-200 text-slate-800 placeholder-slate-400";
+const inputCls = "w-full text-sm px-4 py-3 rounded-xl border outline-none bg-white transition-all focus:ring-2 focus:ring-green-500/20 focus:border-green-600 border-slate-200 text-slate-800 placeholder-slate-400";
 
 const TAMIL_NADU_CITIES = [
   "Salem", "Chennai", "Coimbatore", "Madurai", "Tiruchirappalli", 
@@ -74,7 +74,7 @@ function AutocompleteField({ value, onChange, placeholder, icon: Icon, iconColor
           {filteredOptions.map((opt) => (
             <li 
               key={opt} 
-              className="px-4 py-2.5 hover:bg-amber-50 cursor-pointer text-sm text-slate-700 transition-colors flex items-center justify-between"
+              className="px-4 py-2.5 hover:bg-green-50 cursor-pointer text-sm text-slate-700 transition-colors flex items-center justify-between"
               onClick={() => {
                 onChange(opt);
                 setShowSuggestions(false);
@@ -293,8 +293,8 @@ export default function Booking() {
   if (!isLoggedIn) {
     return (
       <div className="w-full max-w-xl mx-auto pt-8 pb-16 animate-slide-up">
-        <div className="premium-card p-8 sm:p-12 text-center border-t-4 border-amber-500 shadow-xl">
-          <div className="w-20 h-20 rounded-2xl mx-auto flex items-center justify-center mb-6 bg-amber-50 text-amber-600 shadow-inner">
+        <div className="premium-card p-8 sm:p-12 text-center border-t-4 border-green-600 shadow-xl">
+          <div className="w-20 h-20 rounded-2xl mx-auto flex items-center justify-center mb-6 bg-green-50 text-green-700 shadow-inner border border-green-200">
             <Lock size={38} />
           </div>
 
@@ -309,7 +309,7 @@ export default function Booking() {
             <Link
               to="/login?redirect=/book"
               style={fontDisplay}
-              className="w-full btn-primary px-8 py-4 rounded-xl text-base font-bold flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20"
+              className="w-full btn-primary px-8 py-4 rounded-xl text-base font-bold flex items-center justify-center gap-2 shadow-lg shadow-green-900/20"
             >
               Log In to Book Transport <ChevronRight size={18} />
             </Link>
@@ -317,17 +317,17 @@ export default function Booking() {
             <div className="text-center pt-1">
               <Link
                 to="/login?redirect=/book"
-                className="text-xs font-semibold text-slate-500 hover:text-amber-600 transition-colors"
+                className="text-xs font-semibold text-slate-500 hover:text-green-700 transition-colors"
               >
-                Don't have an account? <span className="text-amber-600 font-bold underline">Create New Account</span>
+                Don't have an account? <span className="text-green-700 font-bold underline">Create New Account</span>
               </Link>
             </div>
           </div>
 
           <div className="mt-8 pt-6 border-t border-slate-100 flex items-center justify-center gap-6 text-xs text-slate-500">
             <span className="flex items-center gap-1.5"><ShieldCheck size={14} className="text-green-600"/> Verified Fleet</span>
-            <span className="flex items-center gap-1.5"><MapPin size={14} className="text-blue-600"/> Real Road Distance</span>
-            <span className="flex items-center gap-1.5"><Truck size={14} className="text-amber-600"/> Admin Assigned Lorry</span>
+            <span className="flex items-center gap-1.5"><MapPin size={14} className="text-green-700"/> Real Road Distance</span>
+            <span className="flex items-center gap-1.5"><Truck size={14} className="text-green-700"/> Admin Assigned Lorry</span>
           </div>
         </div>
       </div>
@@ -358,7 +358,7 @@ export default function Booking() {
           {[1, 2, 3, 4, 5].map(i => (
             <div 
               key={i} 
-              className={`h-2 rounded-full transition-all duration-300 ${step >= i ? 'bg-amber-500' : 'bg-slate-200'}`} 
+              className={`h-2 rounded-full transition-all duration-300 ${step >= i ? 'bg-green-600' : 'bg-slate-200'}`} 
               style={{ width: step === i ? '32px' : '8px' }} 
             />
           ))}
@@ -404,7 +404,7 @@ export default function Booking() {
                   onChange={(val) => setForm({ ...form, delivery: val })} 
                   placeholder="e.g. Chennai" 
                   icon={MapPin}
-                  iconColor="text-amber-500" 
+                  iconColor="text-green-600" 
                   options={TAMIL_NADU_CITIES}
                   allowCustom={true}
                 />
@@ -444,7 +444,7 @@ export default function Booking() {
                     key={i}
                     type="button"
                     onClick={() => setForm({ ...form, pickup: r.from, delivery: r.to })}
-                    className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-white border border-slate-200 text-slate-700 hover:border-amber-500 hover:text-amber-600 transition-colors shadow-2xs"
+                    className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-white border border-slate-200 text-slate-700 hover:border-green-600 hover:text-green-700 transition-colors shadow-2xs"
                   >
                     {r.from} → {r.to}
                   </button>
@@ -488,27 +488,27 @@ export default function Booking() {
             </button>
 
             {/* Route & Distance Callout Banner */}
-            <div className="p-5 rounded-2xl bg-gradient-to-r from-slate-900 to-blue-950 text-white mb-6 shadow-lg flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div className="p-5 rounded-2xl bg-gradient-to-r from-slate-900 to-green-950 text-white mb-6 shadow-lg flex flex-col md:flex-row md:items-center justify-between gap-4 border border-green-900">
               <div className="flex items-center gap-4">
-                <div className="p-3 bg-white/10 rounded-xl text-amber-400 shrink-0">
+                <div className="p-3 bg-white/10 rounded-xl text-green-400 shrink-0">
                   <MapPin size={28}/>
                 </div>
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className="text-[11px] font-bold uppercase tracking-wider text-amber-400 bg-amber-400/20 px-2 py-0.5 rounded">
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-green-300 bg-green-500/20 px-2 py-0.5 rounded">
                       {searchResult.routeType || "Actual Road Route"}
                     </span>
                     <span className="text-xs text-slate-300">({searchResult.source})</span>
                   </div>
                   <h3 style={fontDisplay} className="text-xl font-bold mt-1 text-white">
-                    {searchResult.pickup} <ArrowRight className="inline mx-1 text-amber-400" size={16}/> {searchResult.delivery}
+                    {searchResult.pickup} <ArrowRight className="inline mx-1 text-green-400" size={16}/> {searchResult.delivery}
                   </h3>
-                  <p className="text-xs text-slate-300 mt-0.5">Scheduled for: <span className="text-amber-300 font-bold">{form.expected_date}</span></p>
+                  <p className="text-xs text-slate-300 mt-0.5">Scheduled for: <span className="text-green-300 font-bold">{form.expected_date}</span></p>
                 </div>
               </div>
               <div className="md:text-right border-t md:border-t-0 border-white/10 pt-3 md:pt-0">
                 <p className="text-xs uppercase text-slate-400 font-bold tracking-wider">Driving Highway Distance</p>
-                <p style={fontDisplay} className="text-3xl font-extrabold text-amber-400">
+                <p style={fontDisplay} className="text-3xl font-extrabold text-green-400">
                   {searchResult.distance}
                 </p>
               </div>
@@ -614,7 +614,7 @@ export default function Booking() {
                         }}
                         className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all border ${
                           isSelected 
-                            ? "bg-amber-500 text-white border-amber-500 shadow-sm" 
+                            ? "bg-green-600 text-white border-green-600 shadow-sm" 
                             : "bg-white text-slate-700 border-slate-200 hover:border-slate-300"
                         }`}
                       >
@@ -647,7 +647,7 @@ export default function Booking() {
                         onClick={() => setForm({ ...form, helpers: h })}
                         className={`p-3 rounded-xl border text-center transition-all ${
                           isSelected 
-                            ? "border-amber-500 bg-amber-50/70 text-amber-900 ring-2 ring-amber-500/20" 
+                            ? "border-green-600 bg-green-50/70 text-green-900 ring-2 ring-green-500/20" 
                             : "border-slate-200 bg-white hover:border-slate-300 text-slate-700"
                         }`}
                       >
@@ -667,7 +667,7 @@ export default function Booking() {
               <div className="mb-8 p-6 bg-slate-900 text-white rounded-2xl shadow-xl border border-slate-800 animate-slide-up">
                 <div className="flex items-center justify-between border-b border-slate-800 pb-3 mb-4">
                   <div>
-                    <span className="text-[11px] uppercase font-bold tracking-widest text-amber-400">
+                    <span className="text-[11px] uppercase font-bold tracking-widest text-green-400">
                       Transparent Transport Fare Breakdown
                     </span>
                     <h3 style={fontDisplay} className="text-lg font-bold text-white">
@@ -692,11 +692,11 @@ export default function Booking() {
                   {fareBreakdown.helpers > 0 && (
                     <div className="flex justify-between">
                       <span>Helper Charges ({fareBreakdown.helpers} helper(s) × ₹800):</span>
-                      <span className="font-bold text-amber-400">₹{fareBreakdown.helperCharge.toLocaleString('en-IN')}</span>
+                      <span className="font-bold text-green-400">₹{fareBreakdown.helperCharge.toLocaleString('en-IN')}</span>
                     </div>
                   )}
                   {fareBreakdown.totalEstimatedFare === fareBreakdown.minimumFare && (
-                    <div className="flex justify-between text-blue-300">
+                    <div className="flex justify-between text-green-300">
                       <span>Minimum Transport Fare applied:</span>
                       <span className="font-bold">₹{fareBreakdown.minimumFare.toLocaleString('en-IN')}</span>
                     </div>
@@ -710,7 +710,7 @@ export default function Booking() {
                     </span>
                     <span className="text-[11px] text-slate-400">Excludes tolls / taxes. Final quote approved by admin.</span>
                   </div>
-                  <span style={fontDisplay} className="text-3xl font-extrabold text-amber-400">
+                  <span style={fontDisplay} className="text-3xl font-extrabold text-green-400">
                     ₹{fareBreakdown.totalEstimatedFare.toLocaleString('en-IN')}
                   </span>
                 </div>
@@ -857,7 +857,7 @@ export default function Booking() {
                 </div>
                 <div>
                   <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 block mb-0.5">Lorry Assignment</span>
-                  <span className="text-sm font-bold text-amber-700">Admin Assigned (TN 77AY 3006 / TN28 BF 1256)</span>
+                  <span className="text-sm font-bold text-green-700">Admin Assigned (TN 77AY 3006 / TN28 BF 1256)</span>
                 </div>
               </div>
 
@@ -894,14 +894,14 @@ export default function Booking() {
                   <span className="text-xs uppercase font-bold text-slate-400 tracking-wider block">Estimated Transport Fare</span>
                   <span className="text-[11px] text-slate-500">Includes distance, weight tier, and ₹800 helper charges</span>
                 </div>
-                <span style={fontDisplay} className="text-2xl font-extrabold text-amber-600">
+                <span style={fontDisplay} className="text-2xl font-extrabold text-green-700">
                   ₹{fareBreakdown.totalEstimatedFare.toLocaleString('en-IN')}
                 </span>
               </div>
             </div>
 
-            <div className="mb-8 p-4 bg-amber-50 rounded-xl border border-amber-200 text-xs text-amber-900 leading-relaxed flex items-start gap-2.5">
-              <Info size={18} className="text-amber-600 shrink-0 mt-0.5" />
+            <div className="mb-8 p-4 bg-green-50/70 rounded-xl border border-green-200 text-xs text-green-900 leading-relaxed flex items-start gap-2.5">
+              <Info size={18} className="text-green-700 shrink-0 mt-0.5" />
               <div>
                 <strong>Dispatch Note:</strong> Upon submission, our dispatch admin will review your consignment, verify lorry schedule availability, and assign an official lorry and driver. You will be able to track status in real-time.
               </div>
@@ -912,7 +912,7 @@ export default function Booking() {
               disabled={loading}
               style={fontDisplay}
               className={`w-full px-6 py-4 rounded-xl text-base font-bold flex items-center justify-center gap-2 transition-all shadow-lg ${
-                loading ? 'bg-slate-200 text-slate-500 cursor-not-allowed' : 'btn-primary text-slate-900'
+                loading ? 'bg-slate-200 text-slate-500 cursor-not-allowed' : 'btn-primary text-white'
               }`}
             >
               {loading ? (

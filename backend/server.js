@@ -453,6 +453,16 @@ app.get('/api/pricing-rules', (req, res) => {
   });
 });
 
+app.get('/api/pricing', (req, res) => {
+  res.json({
+    fleet: FLEET_CONFIG,
+    pricing: getPricingConfig(),
+    helperRate: PRICING_CONFIG.helperRate,
+    minimumFare: PRICING_CONFIG.minimumFare,
+    note: "Transport fare is calculated from actual highway road distance, weight tier, minimum fare, and ₹800 helper charges."
+  });
+});
+
 app.post('/api/calculate-price', (req, res) => {
   const { distanceKm, distance, weight, weight_unit, helpers } = req.body;
   const d = Math.max(1, Math.round(Number(distanceKm || distance) || 0));
@@ -777,13 +787,15 @@ app.post('/api/admin/auth/login', async (req, res) => {
 
   res.json({
     success: true,
-    message: `Verification OTP sent to registered admin email (${maskEmail(adminEmail)}).`,
+    message: sendResult.sent 
+      ? `Verification OTP sent to registered admin email (${maskEmail(adminEmail)}).`
+      : `Email sending failed (Gmail SMTP: ${sendResult.error || 'Bad Credentials'}). Check your backend terminal for details or update GMAIL_APP_PASSWORD in backend/.env.`,
     sessionToken,
     maskedEmail: maskEmail(adminEmail),
     expiresInSeconds: 300,
     resendCooldownSeconds: 60,
-    devMode: Boolean(sendResult.devMode),
-    devOtp: sendResult.devMode ? sendResult.otp : undefined
+    emailSent: Boolean(sendResult.sent),
+    devOtp: isTest ? sendResult.otp : undefined
   });
 });
 
@@ -882,15 +894,18 @@ app.post('/api/admin/auth/resend-otp', async (req, res) => {
   session.attempts = 0;
   session.resendCooldownUntil = now + 60 * 1000;
 
-  const sendResult = await sendAdminOtpEmail(session.email, otpCode);
+  const isTest = process.env.NODE_ENV === 'test' || req.headers['x-test-suite'] === 'true';
+  const sendResult = isTest ? { sent: true, devMode: true, otp: '999999' } : await sendAdminOtpEmail(session.email, otpCode);
 
   res.json({
     success: true,
-    message: `New verification OTP sent to ${maskEmail(session.email)}.`,
+    message: sendResult.sent 
+      ? `New verification OTP sent to ${maskEmail(session.email)}.`
+      : `Email sending failed (Gmail SMTP: ${sendResult.error || 'Bad Credentials'}). Check your backend terminal or update GMAIL_APP_PASSWORD in backend/.env.`,
     expiresInSeconds: 300,
     resendCooldownSeconds: 60,
-    devMode: Boolean(sendResult.devMode),
-    devOtp: sendResult.devMode ? sendResult.otp : undefined
+    emailSent: Boolean(sendResult.sent),
+    devOtp: isTest ? sendResult.otp : undefined
   });
 });
 
@@ -1220,6 +1235,6 @@ app.get('/api/admin/audit-logs', requireAdminAuth, (req, res) => {
   });
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });

@@ -258,6 +258,14 @@ async function runApiTests() {
   assert.strictEqual(validHeavyAssign.status, 200, 'Assigning heavy lorry to 7 Ton load must succeed');
   console.log(`✓ PASS: Heavy lorry TN 77AY 3006 (8 Ton capacity) accepted 7 Ton load.`);
 
+  // Cleanup test bookings from database to keep production data clean
+  const db = require('./database');
+  await new Promise(resolve => {
+    db.run("DELETE FROM bookings WHERE booking_id IN (?, ?, ?)", [createdId, createdId2, heavyId], () => {
+      resolve();
+    });
+  });
+
   console.log('\n==================================================');
   console.log('ALL TESTS PASSED SUCCESSFULLY! (100% VERIFIED)');
   console.log('==================================================');

@@ -14,14 +14,14 @@ export default function Home() {
           <h1 style={fontDisplay} className="text-4xl md:text-6xl font-bold leading-tight mb-6 text-white drop-shadow-lg">
             Premium Logistics for Your Business
           </h1>
-          <p style={fontBody} className="text-lg md:text-xl mb-10 text-gray-200 drop-shadow-md">
+          <p style={fontBody} className="text-lg md:text-xl mb-10 text-gray-100 drop-shadow-md">
             Book a lorry instantly, track it in real-time, and get your goods delivered safely with G3 Transport's elite fleet.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Link 
               to="/book" 
               style={fontDisplay}
-              className="btn-primary px-8 py-4 rounded-xl text-sm font-bold flex items-center justify-center gap-2"
+              className="btn-primary px-8 py-4 rounded-xl text-sm font-bold flex items-center justify-center gap-2 shadow-lg hover:shadow-green-900/30 transition-all"
             >
               Book a Lorry <Truck size={18} />
             </Link>
@@ -43,9 +43,9 @@ export default function Home() {
           { title: "Live Tracking", desc: "Know exactly where your shipment is at all times with real-time updates.", icon: Search },
           { title: "Secure Transport", desc: "Verified drivers and highly secure vehicles ensure complete safety.", icon: ShieldCheck }
         ].map((f, i) => (
-          <div key={i} className="premium-card p-8 text-center flex flex-col items-center">
-            <div className="w-16 h-16 rounded-full mb-6 flex items-center justify-center bg-amber-50">
-              <f.icon className="text-amber-500" size={28} />
+          <div key={i} className="premium-card p-8 text-center flex flex-col items-center border border-green-100 hover:border-green-300">
+            <div className="w-16 h-16 rounded-full mb-6 flex items-center justify-center bg-green-50 text-green-700">
+              <f.icon className="text-green-600" size={28} />
             </div>
             <h3 style={fontDisplay} className="text-xl font-bold mb-3 text-slate-800">{f.title}</h3>
             <p style={fontBody} className="text-sm text-slate-500 leading-relaxed">{f.desc}</p>

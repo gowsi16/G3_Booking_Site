@@ -27,12 +27,12 @@ function Navbar() {
   ];
 
   return (
-    <nav className="sticky top-0 z-50 glass-panel mb-8 border-b-0 border-slate-200">
+    <nav className="sticky top-0 z-50 glass-panel mb-8 border-b border-green-100 bg-white/90 backdrop-blur-md">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between flex-wrap gap-4">
         <Link to="/" className="flex items-center gap-3">
           <img src="/logo.png" alt="G3 Transport Logo" className="w-10 h-10 object-contain drop-shadow-sm" />
           <div>
-            <h1 style={fontDisplay} className="text-xl font-bold leading-tight text-slate-800 tracking-tight">G3 Transport</h1>
+            <h1 style={fontDisplay} className="text-xl font-bold leading-tight text-green-800 tracking-tight">G3 Transport</h1>
           </div>
         </Link>
         <div className="flex items-center gap-5 text-sm font-medium" style={fontBody}>
@@ -40,7 +40,7 @@ function Navbar() {
             <Link 
               key={l.path} 
               to={l.path} 
-              className={`transition-colors hover:text-amber-500 ${location.pathname === l.path ? 'text-blue-600 font-semibold' : 'text-slate-600'}`}
+              className={`transition-colors hover:text-green-600 ${location.pathname === l.path ? 'text-green-700 font-bold border-b-2 border-green-600 pb-0.5' : 'text-slate-600'}`}
             >
               {l.name}
             </Link>
@@ -48,9 +48,9 @@ function Navbar() {
 
           {/* User state in navbar */}
           {isLoggedIn ? (
-            <div className="flex items-center gap-3 pl-2 border-l border-slate-200">
-              <div className="flex items-center gap-1.5 bg-amber-50 text-amber-900 border border-amber-200/80 px-3 py-1.5 rounded-full text-xs font-semibold">
-                <User size={13} className="text-amber-600" />
+            <div className="flex items-center gap-3 pl-2 border-l border-green-200">
+              <div className="flex items-center gap-1.5 bg-green-50 text-green-800 border border-green-200 px-3 py-1.5 rounded-full text-xs font-semibold">
+                <User size={13} className="text-green-600" />
                 <span className="max-w-[120px] truncate">{user.name.split(' ')[0]}</span>
               </div>
               <button
@@ -67,13 +67,16 @@ function Navbar() {
           ) : (
             <Link 
               to="/login" 
-              className={`transition-colors hover:text-amber-500 font-semibold ${location.pathname === '/login' ? 'text-blue-600' : 'text-slate-700'}`}
+              className={`transition-colors hover:text-green-600 font-semibold ${location.pathname === '/login' ? 'text-green-700 font-bold' : 'text-slate-700'}`}
             >
               Login
             </Link>
           )}
 
-          <Link to="/admin" className="text-xs px-3 py-1.5 border border-slate-300 rounded-full text-slate-500 hover:bg-slate-100 transition-colors">
+          <Link 
+            to="/admin" 
+            className="text-xs px-3.5 py-1.5 border border-green-600 text-green-700 hover:bg-green-700 hover:text-white rounded-full font-semibold transition-all duration-150 shadow-sm"
+          >
             Admin
           </Link>
         </div>
@@ -94,7 +97,7 @@ function Footer() {
         </div>
         <div className="text-left md:text-right">
           <h3 style={fontDisplay} className="text-white font-bold text-xl mb-4">Contact Us</h3>
-          <p className="mb-1 text-amber-400 font-mono text-base tracking-wider">9488289991 &bull; 9080942982</p>
+          <p className="mb-1 text-green-400 font-mono text-base tracking-wider">9488289991 &bull; 9080942982</p>
           <p className="mb-1">gthreetransport@gmail.com</p>
           <p>gowsilan16@gmail.com</p>
         </div>
@@ -107,7 +110,7 @@ export default function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
-        <div className="w-full flex flex-col min-h-screen font-sans bg-slate-50">
+        <div className="w-full flex flex-col min-h-screen font-sans bg-[#F0FDF4]">
           <Navbar />
           <main className="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 relative">
             <Routes>
@@ -126,3 +129,4 @@ export default function App() {
     </AuthProvider>
   );
 }
+
