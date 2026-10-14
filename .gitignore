@@ -8,4 +8,5 @@ backend/.env.*
 dist/
 .DS_Store
 backend/g3transport.db
+backend/*temp*
 
